@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  enjuuei-db:
+    image: postgres:15
+    container_name: enjuuei-db
+    restart: always
+    environment:
+      POSTGRES_USER: enjuuei
+      POSTGRES_PASSWORD: enjuuei_pass
+      POSTGRES_DB: enjuuei_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - enjuuei-net
+
+  enjuuei-api:
+    build:
+      context: ./enjuuei-api
+      dockerfile: Dockerfile
+    container_name: enjuuei-api
+    restart: always
+    environment:
+      DATABASE_HOST: enjuuei-db
+      DATABASE_PORT: 5432
+      DATABASE_USER: enjuuei
+      DATABASE_PASSWORD: enjuuei_pass
+      DATABASE_NAME: enjuuei_db
+    depends_on:
+      - enjuuei-db
+    ports:
+      - "3000:3000"
+    networks:
+      - enjuuei-net
+
+  enjuuei-front:
+    build:
+      context: ./enjuuei-front
+      dockerfile: Dockerfile
+    container_name: enjuuei-front
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - enjuuei-api
+    networks:
+      - enjuuei-net
+
+volumes:
+  pgdata:
+
+networks:
+  enjuuei-net:
