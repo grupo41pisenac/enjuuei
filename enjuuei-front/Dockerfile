@@ -1,6 +1,6 @@
 # Se formos utilizar algum, framework de javascript/typescript pro front (exemplo: React), depois que tivermos o esqueleto da aplicação é só remover as partes comentadas. Caso contrário, será necessário montar o Dockerfile conforme a stack escolhida.
 
-FROM node:22-slim as build
+FROM node:22-slim AS build
 
 WORKDIR /app
 # COPY package*.json ./
