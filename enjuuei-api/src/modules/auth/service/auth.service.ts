@@ -26,30 +26,38 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto, res: Response) {
-    const user = await this.validateUser(loginDto.email, loginDto.password);
-    if (user && !user.status) {
-      res.status(401).send(user.message);
+    const validation = await this.validateUser(
+      loginDto.email,
+      loginDto.password,
+    );
+    if (validation && !validation.status) {
+      res.status(401).send(validation.message);
       return;
     }
 
     let payload: {
       sub: string;
       name: string;
+      email: string;
     };
 
-    if (user?.payload) {
+    if (validation?.payload) {
       payload = {
-        sub: user.payload.id,
-        name: user.payload.name,
+        sub: validation.payload.id,
+        name: validation.payload.name,
+        email: validation.payload.email,
       };
+
       const access_token = await this.jwtService.signAsync(payload, {
         expiresIn: '60m',
         secret: process.env.SECRET_KEY,
       });
+
       res.cookie('access_token', access_token, {
         httpOnly: true,
         secure: true,
       });
+
       res.send('Login Successful!');
     } else {
       throw new UnauthorizedException();
