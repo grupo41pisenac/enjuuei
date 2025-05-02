@@ -1,5 +1,7 @@
 import { UserStatus } from 'src/core/enums/status.enum';
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -11,6 +13,7 @@ import {
 } from 'typeorm';
 import { Product } from './product.entity';
 import { Order } from './order.entity';
+import * as bcrypt from 'bcryptjs';
 
 @Entity('users')
 export class User {
@@ -25,6 +28,17 @@ export class User {
 
   @Column({ unique: true })
   email: string;
+
+  @Column()
+  password: string;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    if (this.password) {
+      this.password = await bcrypt.hash(this.password, 10);
+    }
+  }
 
   @Column()
   phone: string;

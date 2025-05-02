@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './modules/user/user.module';
 import { ProductModule } from './modules/product/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     UserModule,
     ProductModule,
     TypeOrmModule.forRoot({
