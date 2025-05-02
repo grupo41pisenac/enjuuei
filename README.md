@@ -33,10 +33,32 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
     - Response 200:
     ```` 
         {
-
+            success: true,
         }
     ````
+    - Response Cookie:
+    ```` 
+        access_token: {token}
+    ````
 - Criação de usuário: `POST /user/register`
+    - Request:
+    ```` 
+        {
+            name: "João",
+            lastName: "das Neves",
+            email: "email@email.com",
+            phone: "11987654321",
+            document: "12345678900"
+        }
+    ````
+    - Response 200:
+    ```` 
+        {
+            success: true
+        }
+    ````
+- Alteração de usuário: `PATCH /user`
+    - Header: `Bearer {token}`
     - Request:
     ```` 
         {
@@ -81,6 +103,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Registro de Produto: `POST /product`
+    - Header: `Bearer {token}`
     - Request:
     ```` 
         {
@@ -98,6 +121,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Edição de Produto: `PATCH /product/:id`
+    - Header: `Bearer {token}`
     - Request:
     ```` 
         {
@@ -115,6 +139,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Exclusão de Produto: `DELETE /product/:id`
+    - Header: `Bearer {token}`
     - Response 200:
     ```` 
         {
@@ -145,6 +170,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Listagem do Carrinho: `GET /user/chart`
+    - Header: `Bearer {token}`
     - Response 200:
     ```` 
         {
@@ -171,7 +197,8 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
             ]
         }
     ````
-- Criação de Pedidos: `POST /order` 
+- Criação de Pedidos: `POST /order`
+    - Header: `Bearer {token}` 
     - Request:
     ```` 
         {
@@ -184,7 +211,8 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
             success: true
         }
     ````
-- Listagem de Pedidos do Usuário: `GET /order` 
+- Listagem de Pedidos do Usuário: `GET /order`
+    - Header: `Bearer {token}` 
     - Response 200:
     ```` 
         {

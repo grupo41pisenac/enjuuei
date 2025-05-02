@@ -58,7 +58,7 @@ export class AuthService {
         secure: true,
       });
 
-      res.send('Login Successful!');
+      res.send({ success: true });
     } else {
       throw new UnauthorizedException();
     }
