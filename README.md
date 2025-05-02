@@ -58,7 +58,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Alteração de usuário: `PATCH /user`
-    - Header: `Bearer {token}`
+    - Request Header: `Authorization: Bearer {token}`
     - Request:
     ```` 
         {
@@ -103,7 +103,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Registro de Produto: `POST /product`
-    - Header: `Bearer {token}`
+    - Request Header: `Authorization: Bearer {token}`
     - Request:
     ```` 
         {
@@ -121,7 +121,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Edição de Produto: `PATCH /product/:id`
-    - Header: `Bearer {token}`
+    - Request Header: `Authorization: Bearer {token}`
     - Request:
     ```` 
         {
@@ -139,7 +139,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Exclusão de Produto: `DELETE /product/:id`
-    - Header: `Bearer {token}`
+    - Request Header: `Authorization: Bearer {token}`
     - Response 200:
     ```` 
         {
@@ -170,7 +170,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Listagem do Carrinho: `GET /user/chart`
-    - Header: `Bearer {token}`
+    - Request Header: `Authorization: Bearer {token}`
     - Response 200:
     ```` 
         {
@@ -198,7 +198,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Criação de Pedidos: `POST /order`
-    - Header: `Bearer {token}` 
+    - Request Header: `Authorization: Bearer {token}` 
     - Request:
     ```` 
         {
@@ -212,7 +212,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
         }
     ````
 - Listagem de Pedidos do Usuário: `GET /order`
-    - Header: `Bearer {token}` 
+    - Request Header: `Authorization: Bearer {token}` 
     - Response 200:
     ```` 
         {
