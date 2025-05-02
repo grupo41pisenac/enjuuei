@@ -15,19 +15,23 @@ export class AuthGuard implements CanActivate {
   constructor(private jwtService: JwtService, private reflector: Reflector) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const isPublic = this.reflector.get<boolean>(
-      'isPublic',
-      context.getHandler(),
-    );
+    const isPublic = this.reflector.get<boolean>('isPublic', context.getHandler());
+    
     if (isPublic) {
       return true;
     }
 
     const request: Request = context.switchToHttp().getRequest();
-    const token: string = request.cookies?.access_token as string;
+    const authorizationHeader = request.headers['authorization'];
 
-    if (!token) {
-      throw new UnauthorizedException();
+    if (!authorizationHeader) {
+      throw new UnauthorizedException('Authorization header is missing');
+    }
+
+    const [bearer, token] = authorizationHeader.split(' ');
+
+    if (bearer !== 'Bearer' || !token) {
+      throw new UnauthorizedException('Invalid authorization format');
     }
 
     try {
@@ -36,7 +40,7 @@ export class AuthGuard implements CanActivate {
       });
       request['user'] = payload;
     } catch {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Invalid or expired token');
     }
 
     return true;

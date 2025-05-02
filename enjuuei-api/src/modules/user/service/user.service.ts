@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { SuccessDto } from 'src/core/dto/success.dto';
 import { UserStatus } from 'src/core/enums/status.enum';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
+import { CreateUserDto } from '../dto/createUser.dto';
 
 @Injectable()
 export class UserService {
@@ -10,9 +12,6 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
-  getHello(): string {
-    return 'Hello World!';
-  }
 
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
@@ -25,5 +24,34 @@ export class UserService {
         status: UserStatus.ACTIVE,
       },
     });
+  }
+
+  async create(createUserDto: CreateUserDto): Promise<SuccessDto> {
+    const exists = await this.userRepository.findOne({
+      where: {
+        email: createUserDto.email,
+      },
+    });
+
+    if (exists) {
+      return {
+        success: false,
+      };
+    }
+
+    try {
+      const user = this.userRepository.create(createUserDto);
+      await this.userRepository.save(user);
+    } catch (error) {
+      console.log(error);
+
+      return {
+        success: false,
+      };
+    }
+
+    return {
+      success: true,
+    };
   }
 }
