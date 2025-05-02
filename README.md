@@ -20,3 +20,200 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
 
 ## Inicialização do Front para Dev
 - 
+
+## Contrato da API
+- Login: `POST /user/login`
+    - Request:
+    ```` 
+    {
+        email: "email@email.com",
+        password: "password"
+    }
+    ````
+    - Response 200:
+    ```` 
+        {
+
+        }
+    ````
+- Criação de usuário: `POST /user/register`
+    - Request:
+    ```` 
+        {
+            name: "João",
+            lastName: "das Neves",
+            email: "email@email.com",
+            phone: "11987654321",
+            document: "12345678900"
+        }
+    ````
+    - Response 200:
+    ```` 
+        {
+            success: true
+        }
+    ````
+- Listagem de Produtos: `GET /product`
+    - Response 200:
+    ```` 
+        {
+            products: [
+                {
+                    id: "uuid",
+                    title: "Produto 1",
+                    description: "Descrição do produto 1",
+                    price: 120.31,
+                    images: [
+                        {
+                            id: "uuid",
+                            source: "path/to/image"
+                        }
+                    ],
+                    ownerUser: {
+                        name: "João",
+                        lastName: "das Neves",
+                    },
+                    category: {
+                        title: "Categoria A",
+                    }
+                }
+            ]
+        }
+    ````
+- Registro de Produto: `POST /product`
+    - Request:
+    ```` 
+        {
+            title: "Produto 2",
+            description: "Descrição do produto 2",
+            price: 120.31,
+            images: [],
+            categoryId: "uuid de Category",
+        }
+    ````
+    - Response 200:
+    ```` 
+        {
+            success: true
+        }
+    ````
+- Edição de Produto: `PATCH /product/:id`
+    - Request:
+    ```` 
+        {
+            title: "Produto 2",
+            description: "Descrição do produto 2",
+            price: 120.31,
+            images: [],
+            categoryId: "uuid de Category",
+        }
+    ````
+    - Response 200:
+    ```` 
+        {
+            success: true
+        }
+    ````
+- Exclusão de Produto: `DELETE /product/:id`
+    - Response 200:
+    ```` 
+        {
+            success: true
+        }
+    ````
+- Detalhe de Produto: `GET /product/:id`
+    - Response 200:
+    ```` 
+        {
+            id: "uuid",
+            title: "Produto 1",
+            description: "Descrição do produto 1",
+            price: 120.31,
+            images: [
+                {
+                    id: "uuid",
+                    source: "path/to/image"
+                }
+            ],
+            ownerUser: {
+                name: "João",
+                lastName: "das Neves",
+            },
+            category: {
+                title: "Categoria A",
+            }
+        }
+    ````
+- Listagem do Carrinho: `GET /user/chart`
+    - Response 200:
+    ```` 
+        {
+            products: [
+                {
+                    id: "uuid",
+                    title: "Produto 1",
+                    description: "Descrição do produto 1",
+                    price: 120.31,
+                    images: [
+                        {
+                            id: "uuid",
+                            source: "path/to/image"
+                        }
+                    ],
+                    ownerUser: {
+                        name: "João",
+                        lastName: "das Neves",
+                    },
+                    category: {
+                        title: "Categoria A",
+                    }
+                }
+            ]
+        }
+    ````
+- Criação de Pedidos: `POST /order` 
+    - Request:
+    ```` 
+        {
+            products: ["uuid produto 1", "uuid produto 2"]
+        }
+    ````
+    - Response 200:
+    ```` 
+        {
+            success: true
+        }
+    ````
+- Listagem de Pedidos do Usuário: `GET /order` 
+    - Response 200:
+    ```` 
+        {
+            orders: [
+                {
+                    id: "uuid de order",
+                    products: [
+                        {
+                            id: "uuid",
+                            title: "Produto 1",
+                            description: "Descrição do produto 1",
+                            price: 120.31,
+                            images: [
+                                {
+                                    id: "uuid",
+                                    source: "path/to/image"
+                                }
+                            ],
+                            ownerUser: {
+                                name: "João",
+                                lastName: "das Neves",
+                            },
+                            category: {
+                                title: "Categoria A",
+                            }
+                        }
+                    ],
+                    status: "PENDING"
+                }
+            ]
+        }
+    ````
