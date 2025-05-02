@@ -9,11 +9,6 @@ import { UpdateUserDto } from '../dto/updateUser.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
-
   @IsPublic()
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -29,5 +24,10 @@ export class UserController {
       };
     }
     return this.userService.update(updateUserDto, req.user.email as string);
+  }
+
+  @Get('chart')
+  chart() {
+    return 'Deve retornar o carrinho do usuário';
   }
 }

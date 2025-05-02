@@ -3,12 +3,14 @@ import { UserModule } from './modules/user/user.module';
 import { ProductModule } from './modules/product/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
+import { OrderModule } from './modules/order/order.module';
 
 @Module({
   imports: [
     AuthModule,
     UserModule,
     ProductModule,
+    OrderModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DATABASE_HOST,
