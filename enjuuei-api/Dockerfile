@@ -13,4 +13,4 @@ RUN npx nest build
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start:prod"]
+CMD npm run seed && npm run start:prod
