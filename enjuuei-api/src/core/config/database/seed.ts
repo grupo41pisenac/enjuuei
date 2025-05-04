@@ -5,6 +5,8 @@ import { Product } from '../../../entities/product.entity';
 import { User } from '../../../entities/user.entity';
 import { Order } from '../../../entities/order.entity';
 import { Image } from '../../../entities/image.entity';
+import { CreateUserDto } from 'src/modules/user/dto/createUser.dto';
+import { ProductStatus } from 'src/core/enums/status.enum';
 
 config();
 
@@ -22,6 +24,16 @@ const AppDataSource = new DataSource({
 async function seed() {
   await AppDataSource.initialize();
 
+  await seedCategories();
+
+  await seedUsers();
+
+  await seedProducts();
+
+  await AppDataSource.destroy();
+}
+
+async function seedCategories() {
   const categoryRepository = AppDataSource.getRepository(Category);
 
   const categories = [
@@ -51,8 +63,89 @@ async function seed() {
       console.log(`Categoria "${existing.title}" já existe.`);
     }
   }
+}
 
-  await AppDataSource.destroy();
+async function seedUsers() {
+  const userRepository = AppDataSource.getRepository(User);
+
+  const users: CreateUserDto[] = [
+    {
+      name: 'Carlos',
+      lastName: 'Magno',
+      document: '98765432100',
+      email: 'carlos.magno@gmail.com',
+      password: '789456',
+      phone: '12987654123',
+    },
+  ];
+
+  for (const userData of users) {
+    const existing = await userRepository.findOneBy({
+      email: userData.email,
+    });
+    if (!existing) {
+      const user = userRepository.create(userData);
+      await userRepository.save(user);
+      console.log(`Usuário "${user.name}" criado.`);
+    } else {
+      console.log(`Usuário "${existing.email}" já existe.`);
+    }
+  }
+}
+
+async function seedProducts() {
+  const productRepository = AppDataSource.getRepository(Product);
+  const imageRepository = AppDataSource.getRepository(Image);
+  const userRepository = AppDataSource.getRepository(User);
+  const categoryRepository = AppDataSource.getRepository(Category);
+
+  const ownerUser = await userRepository.findOneBy({});
+
+  const category = await categoryRepository.findOneBy({});
+
+  if (!ownerUser || !category) {
+    console.error(
+      'É necessário ter pelo menos um usuário e uma categoria no banco.',
+    );
+    return;
+  }
+
+  const productsData = [
+    {
+      title: 'Camisa Preta',
+      description: 'Camisa básica preta tamanho M',
+      price: 59.9,
+      status: ProductStatus.AVAILABLE,
+      ownerUser,
+      categoryId: category.id,
+      category,
+      images: [
+        imageRepository.create({
+          source: 'uploads/camisa-preta.jpg',
+        }),
+      ],
+    },
+    {
+      title: 'Tênis Branco',
+      description: 'Tênis branco confortável para corrida',
+      price: 199.99,
+      status: ProductStatus.AVAILABLE,
+      ownerUser,
+      categoryId: category.id,
+      category,
+      images: [
+        imageRepository.create({
+          source: 'uploads/tenis-branco.jpg',
+        }),
+      ],
+    },
+  ];
+
+  for (const data of productsData) {
+    const product = productRepository.create(data);
+    await productRepository.save(product);
+    console.log(`Produto "${product.title}" criado com sucesso.`);
+  }
 }
 
 seed().catch((err) => {
