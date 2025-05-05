@@ -2,6 +2,15 @@
 
 Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuuei-api) e o banco de dados (enjuuei_db) rodando em containers Docker.
 
+## Desenvolvido por:
+- ANA PAULA GOULART ARAUJO 
+- DANIEL HENRIQUE GOMES MANTOVANI
+- ISMAEL DOS SANTOS CARDOSO 
+- MARIA CECILIA BENTO GONCALVES 
+- RENAN PRIMO
+- SERGIO LEONARDO SOUZA TAVARES 
+- VINÍCIUS GIUSEPPE G. L. DE OLIVEIRA
+
 ## Requisitos
 - Docker
 - Docker Compose
