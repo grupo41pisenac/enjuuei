@@ -4,13 +4,17 @@ import { ProductModule } from './modules/product/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { OrderModule } from './modules/order/order.module';
+import { Repository } from 'typeorm';
+import { DatabaseModule } from './modules/database/database.module';
 
 @Module({
   imports: [
+    Repository,
     AuthModule,
     UserModule,
     ProductModule,
     OrderModule,
+    DatabaseModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DATABASE_HOST,
