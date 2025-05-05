@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SuccessDto } from 'src/core/dto/success.dto';
 import { UserStatus } from 'src/core/enums/status.enum';
@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from '../dto/createUser.dto';
 import { UpdateUserDto } from '../dto/updateUser.dto';
 import * as bcrypt from 'bcryptjs';
+import { ListAllProductsDto } from 'src/modules/product/dto/response/listAllProducts.dto';
 
 @Injectable()
 export class UserService {
@@ -86,5 +87,23 @@ export class UserService {
     return {
       success: true,
     };
+  }
+
+  async listUserChart(email: string): Promise<ListAllProductsDto> {
+    const user = await  this.userRepository.findOne({
+      select: ['chart'],
+      where: {
+        email,
+        status: UserStatus.ACTIVE,
+      },
+    });
+
+    if (!user || !user?.chart) {
+      throw new NotFoundException('User chart not found')
+    }
+
+    return {
+      products: user?.chart,
+    } 
   }
 }

@@ -4,6 +4,7 @@ import { UserService } from '../service/user.service';
 import { CreateUserDto } from '../dto/createUser.dto';
 import { IsPublic } from 'src/core/decorators/isPublic.decorator';
 import { UpdateUserDto } from '../dto/updateUser.dto';
+import { ListAllProductsDto } from 'src/modules/product/dto/response/listAllProducts.dto';
 
 @Controller('user')
 export class UserController {
@@ -27,7 +28,7 @@ export class UserController {
   }
 
   @Get('chart')
-  chart() {
-    return 'Deve retornar o carrinho do usuário';
+  async chart(@Request() req): Promise<ListAllProductsDto> {
+    return this.userService.listUserChart(req.user.email as string);
   }
 }
