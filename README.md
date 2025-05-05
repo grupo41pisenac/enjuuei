@@ -9,7 +9,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
 - MARIA CECILIA BENTO GONCALVES 
 - RENAN PRIMO
 - SERGIO LEONARDO SOUZA TAVARES 
-- VINÍCIUS GIUSEPPE G. L. DE OLIVEIRA
+- [VINÍCIUS GIUSEPPE G. L. DE OLIVEIRA](https://github.com/vinigiu)
 
 ## Requisitos
 - Docker
