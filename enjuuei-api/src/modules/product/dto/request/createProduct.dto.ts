@@ -1,4 +1,5 @@
 import { IsNumber, IsString } from '@nestjs/class-validator';
+import { IsUUID } from 'class-validator';
 
 export class CreateProductDto {
   @IsString()
@@ -10,8 +11,6 @@ export class CreateProductDto {
   @IsNumber()
   price: number;
 
-  images: Array<any>;
-
-  @IsString()
+  @IsUUID()
   categoryId: string;
 }
