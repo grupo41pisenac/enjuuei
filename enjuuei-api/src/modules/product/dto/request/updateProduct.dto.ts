@@ -1,4 +1,5 @@
 import { IsNumber, IsOptional, IsString } from '@nestjs/class-validator';
+import { IsUUID } from 'class-validator';
 
 export class UpdateProductDto {
   @IsString()
@@ -13,10 +14,7 @@ export class UpdateProductDto {
   @IsOptional()
   price?: number;
 
-  @IsOptional()
-  images?: Array<any>;
-
-  @IsString()
+  @IsUUID()
   @IsOptional()
   categoryId?: string;
 }
