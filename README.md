@@ -111,6 +111,20 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
             ]
         }
     ````
+- Listagem de Categories: `GET /product/category`
+    - Request Header: `Authorization: Bearer {token}`
+    - Response 200:
+    ```` 
+        {
+            categories: [
+                {
+                    id: "uuid",
+                    title: "Produto 1",
+                    description: "Descrição do produto 1",
+                }
+            ]
+        }
+    ````
 - Registro de Produto: `POST /product`
     - Request Header: `Authorization: Bearer {token}`
     - Request:
