@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Contato EnjuUei</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>EnjuUei</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/enjuuei-front/src/home/index.html">Home</a></li>
+                <li><a href="/enjuuei-front/src/Cadastro/index.html">Cadastro</a></li>
+                <li><a href="/enjuuei-front/src/Login/index.html">Login</a></li>
+                <li><a href="/enjuuei-front/src/Contato/index.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="formulario-contato">
+        <h2>Fale Conosco</h2>
+
+
+        <p>Obrigado. Entraremos em contato pelo e-mail.</p>
+
+        <form method="POST" action="contato.php">
+            <div>
+                <label for="nome">Seu nome:</label>
+                <input type="text" name="nome" id="nome" required>
+            </div>
+            <div>
+                <label for="email">Seu e-mail:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div>
+                <label for="mensagem">Mensagem:</label>
+                <textarea name="mensagem" id="mensagem" rows="5" required></textarea>
+            </div>
+            <div>
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Roupas Usadas - Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>

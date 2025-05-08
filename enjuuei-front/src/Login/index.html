@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Roupas Usadas</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h1>Roupas Usadas</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/enjuuei-front/src/home/index.html">Home</a></li>
+                <li><a href="/enjuuei-front/src/Cadastro/index.html">Cadastro</a></li>
+                <li><a href="/enjuuei-front/src/Contato/index.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="formulario-login">
+        <h2>Login</h2>
+
+        <form action="login.php" method="POST">
+            <div>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" value="usuario@email.com" required>
+            </div>
+            <div>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            <div>
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+        <br>
+        <p>Não tem uma conta? <a href="/enjuuei-front/src/Cadastro/index.html">Cadastre-se aqui</a></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Roupas Usadas - Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>
