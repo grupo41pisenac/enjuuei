@@ -30,7 +30,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
 ## Inicialização do Front para Dev
 - 
 
-## Contrato da API
+## Contrato da API - Arquivo Postman disponível em `/enjuuei-api/docs/enjuuei.postman_collection.json`
 - Login: `POST /user/login`
     - Request:
     ```` 
