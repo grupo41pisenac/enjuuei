@@ -30,7 +30,7 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
 ## Inicialização do Front para Dev
 - 
 
-## Contrato da API
+## Contrato da API - Arquivo Postman disponível em `/enjuuei-api/docs/enjuuei.postman_collection.json`
 - Login: `POST /user/login`
     - Request:
     ```` 
@@ -107,6 +107,20 @@ Este projeto contempla a aplicação front-end (enjuuei-front), back-end (enjuue
                     category: {
                         title: "Categoria A",
                     }
+                }
+            ]
+        }
+    ````
+- Listagem de Categories: `GET /product/category`
+    - Request Header: `Authorization: Bearer {token}`
+    - Response 200:
+    ```` 
+        {
+            categories: [
+                {
+                    id: "uuid",
+                    title: "Produto 1",
+                    description: "Descrição do produto 1",
                 }
             ]
         }
