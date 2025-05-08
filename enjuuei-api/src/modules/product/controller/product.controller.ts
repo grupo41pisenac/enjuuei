@@ -22,6 +22,10 @@ import { ListAllCategoriesDto } from '../dto/response/listAllCategories.dto';
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
+  @Get('category')
+  listCategories(): Promise<ListAllCategoriesDto> {
+    return this.productService.listAllCategories();
+  }
 
   @IsPublic()
   @Get()
@@ -57,10 +61,5 @@ export class ProductController {
   @Delete(':id')
   deleteProduct(@Param('id') productId: string): Promise<SuccessDto> {
     return this.productService.delete(productId);
-  }
-
-  @Get()
-  listCategories(): Promise<ListAllCategoriesDto> {
-    return this.productService.listAllCategories();
   }
 }
