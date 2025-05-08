@@ -7,6 +7,7 @@ enum ProductStatus {
   AVAILABLE = 'AVAILABLE',
   RESERVED = 'RESERVED',
   SOLD = 'SOLD',
+  EXCLUDED = 'EXCLUDED',
 }
 
 enum OrderStatus {

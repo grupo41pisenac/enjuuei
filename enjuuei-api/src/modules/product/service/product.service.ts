@@ -8,6 +8,8 @@ import { CreateProductDto } from '../dto/request/createProduct.dto';
 import { UpdateProductDto } from '../dto/request/updateProduct.dto';
 import { Image } from 'src/entities/image.entity';
 import { Category } from 'src/entities/category.entity';
+import { ProductStatus } from 'src/core/enums/status.enum';
+import { ListAllCategoriesDto } from '../dto/response/listAllCategories.dto';
 
 @Injectable()
 export class ProductService {
@@ -94,7 +96,9 @@ export class ProductService {
 
   async delete(id: string): Promise<SuccessDto> {
     try {
-      await this.productRepository.delete(id);
+      await this.productRepository.update(id, {
+        status: ProductStatus.EXCLUDED,
+      });
     } catch (error) {
       console.error(error);
       return {
@@ -103,6 +107,14 @@ export class ProductService {
     }
     return {
       success: true,
+    };
+  }
+
+  async listAllCategories(): Promise<ListAllCategoriesDto> {
+    const categories = await this.categoryRepository.find();
+
+    return {
+      categories,
     };
   }
 }

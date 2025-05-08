@@ -17,6 +17,7 @@ import { SuccessDto } from 'src/core/dto/success.dto';
 import { IsPublic } from 'src/core/decorators/isPublic.decorator';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { multerConfig } from 'src/core/config/multer.config';
+import { ListAllCategoriesDto } from '../dto/response/listAllCategories.dto';
 
 @Controller('product')
 export class ProductController {
@@ -56,5 +57,10 @@ export class ProductController {
   @Delete(':id')
   deleteProduct(@Param('id') productId: string): Promise<SuccessDto> {
     return this.productService.delete(productId);
+  }
+
+  @Get()
+  listCategories(): Promise<ListAllCategoriesDto> {
+    return this.productService.listAllCategories();
   }
 }
