@@ -16,6 +16,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
+  @IsPublic()
   @Patch()
   async update(@Body() updateUserDto: UpdateUserDto, @Request() req) {
     if (!req.user) {
@@ -27,6 +28,7 @@ export class UserController {
     return this.userService.update(updateUserDto, req.user.email as string);
   }
 
+  @IsPublic()
   @Get('chart')
   async chart(@Request() req): Promise<ListAllProductsDto> {
     return this.userService.listUserChart(req.user.email as string);
