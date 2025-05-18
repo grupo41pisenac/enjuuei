@@ -22,6 +22,7 @@ import { ListAllCategoriesDto } from '../dto/response/listAllCategories.dto';
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
+  @IsPublic()
   @Get('category')
   listCategories(): Promise<ListAllCategoriesDto> {
     return this.productService.listAllCategories();
@@ -39,6 +40,7 @@ export class ProductController {
     return this.productService.detail(productId);
   }
 
+  @IsPublic()
   @Post()
   @UseInterceptors(
     FileFieldsInterceptor([{ name: 'images', maxCount: 5 }], multerConfig),
@@ -50,6 +52,7 @@ export class ProductController {
     return this.productService.create(createProductDto, files.images || []);
   }
 
+  @IsPublic()
   @Patch(':id')
   update(
     @Body() updateProductDto: UpdateProductDto,
@@ -58,6 +61,7 @@ export class ProductController {
     return this.productService.update(updateProductDto, productId);
   }
 
+  @IsPublic()
   @Delete(':id')
   deleteProduct(@Param('id') productId: string): Promise<SuccessDto> {
     return this.productService.delete(productId);
